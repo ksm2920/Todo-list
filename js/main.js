@@ -6,8 +6,8 @@ window.onload = function() {
     let clearButton = document.querySelector("#clear-button");
     
     todoForm.addEventListener('submit', todo);
-    filter.addEventListener("keyup", filterTask);
-    todoList.addEventListener('click', clearTask);
+    filter.addEventListener("keyup", filterTodo);
+    todoList.addEventListener('click', clearTodo);
     clearButton.addEventListener("click", clearAll);
 
     getFromLocalStorage();
@@ -17,13 +17,13 @@ let todos = [];
 let filterText = "";
 
 function todo(e) {
-    let newTask = document.querySelector('.todo-input');
+    let newTodo = document.querySelector('.todo-input');
     
     e.preventDefault();
-    addTodo(newTask.value); 
+    addTodo(newTodo.value); 
     
     function addTodo() {
-        let item = newTask.value;
+        let item = newTodo.value;
         if (item !== '') {
             let todo = {
                 id: Date.now(),
@@ -34,15 +34,15 @@ function todo(e) {
             todos.push(todo);
             addToLocalStorage(todos);
             
-            newTask.value = '';
+            newTodo.value = '';
         }
         else {
-            alert("Please add a task!");
+            alert("Please add a Todo!");
         } 
     }
 }
 
-function renderTodos() {
+function generateHTML() {
     let todoList = document.querySelector('.todo-items');
     todoList.innerHTML = '';
     
@@ -87,7 +87,7 @@ function addToLocalStorage(todos) {
     
     localStorage.setItem('todos', JSON.stringify(todos));
     
-    renderTodos();
+    generateHTML();
 }
 
 
@@ -96,7 +96,7 @@ function getFromLocalStorage() {
     if (reference) {
         
         todos = JSON.parse(reference);
-        renderTodos();
+        generateHTML();
     }
 }
 
@@ -136,7 +136,7 @@ function clearAll() {
 }
 
 
-function clearTask(e) {
+function clearTodo(e) {
     
     if (e.target.type === 'checkbox') {
         
@@ -149,9 +149,9 @@ function clearTask(e) {
     }
 }
 
-function filterTask(e) {
+function filterTodo(e) {
     filterText = e.target.value.toLowerCase();
-    renderTodos();
+    generateHTML();
     
 }
 
