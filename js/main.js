@@ -15,6 +15,7 @@ window.onload = function() {
     todoItemsList.addEventListener('click', clearTask);
     clearButton.addEventListener("click", clearAll);
     
+    
     function todo(e) {
         e.preventDefault();
         addTodo(todoInput.value); 
