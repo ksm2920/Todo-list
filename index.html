@@ -20,15 +20,16 @@
         <h1>Todo List</h1>
         <form class="todo-form">
           <div class="input-group">
-            <input type="text" class="todo-input" placeholder="Add a new task">
+            <input type="text" class="todo-input form-control" placeholder="Add a new task">
             <div class="input-group-append">
               <button type="submit" class="btn btn-dark add-button">Add</button>
             </div>
           </div>
+          <div>
+            <input type="text" class="search-input form-control" id="filter" placeholder="Filter tasks">
+          </div>   
         </form>
-        <div class="input-group">
-          <input type="text" class="search" id="filter" placeholder="Filter tasks">
-        </div>
+        
         <div>
           <ul class="todo-items"></ul>
           <button class="btn btn-secondary" id="clear-button" type="button">Clear All</button>
