@@ -1,0 +1,24 @@
+* {
+  padding: 0;
+  margin: 0; }
+
+body {
+  justify-content: center; }
+
+h1 {
+  color: black;
+  font-size: 3rem; }
+
+.item {
+  background-color: #fff;
+  padding: 10px;
+  font-size: 1.1rem; }
+
+.checkbox {
+  margin-right: 10px; }
+
+.btn-danger {
+  float: right; }
+
+.checked {
+  text-decoration: line-through; }
