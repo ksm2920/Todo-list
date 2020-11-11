@@ -90,7 +90,6 @@ function addToLocalStorage(todos) {
     generateHTML();
 }
 
-
 function getFromLocalStorage() {
     let reference = localStorage.getItem('todos');
     if (reference) {
@@ -99,7 +98,6 @@ function getFromLocalStorage() {
         generateHTML();
     }
 }
-
 
 function toggle(id) {
     todos.forEach(function(item) {
@@ -113,7 +111,6 @@ function toggle(id) {
     addToLocalStorage(todos);
 }
 
-
 function deleteTodo(id) {
     
     todos = todos.filter(function(item) {
@@ -125,16 +122,12 @@ function deleteTodo(id) {
     addToLocalStorage(todos);
 }
 
-
-
-
 function clearAll() {
     let todoList = document.querySelector('.todo-items');
     todoList.innerHTML = " ";
     localStorage.clear(todos);
     todos = [];
 }
-
 
 function clearTodo(e) {
     
