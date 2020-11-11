@@ -1,6 +1,6 @@
 window.onload = function() {
     let todoForm = document.querySelector('.todo-form');
-    let filter = document.querySelector("#search-input");
+    let filter = document.querySelector("#filter-input");
     let todoList = document.querySelector('.todo-items');
     let clearButton = document.querySelector("#clear-button");
     
@@ -8,7 +8,7 @@ window.onload = function() {
     filter.addEventListener("keyup", filterTodo);
     todoList.addEventListener('click', clearTodo);
     clearButton.addEventListener("click", clearAll);
-
+    
     getFromLocalStorage();
 } 
 
@@ -21,9 +21,8 @@ function todo(e) {
     e.preventDefault();
     addTodo(newTodo.value); 
     
-    function addTodo() {
+    function addTodo(e) {
         let item = newTodo.value;
-        
         if (item !== '') {
             let todo = {
                 id: Date.now(),
@@ -41,36 +40,28 @@ function todo(e) {
 }
 
 function generateHTML() {
-    let todoList = document.querySelector('.todo-items');
+    let todoItems = document.querySelector('.todo-items');
     
-    todoList.innerHTML = '';
+    todoItems.innerHTML = '';
     
     todos.forEach(function(item) {
         let checked = item.completed ? 'checked': null;
         let li = document.createElement('li');
         li.setAttribute('class', 'item');
         li.setAttribute('data-key', item.id);
-        
+    
         if (item.completed === true) {
             li.classList.add('checked');
         }
-         li.innerHTML = `
+        li.innerHTML = `
         <input type="checkbox" class="checkbox" ${checked}>
         ${item.name}
         <button class="btn btn-danger delete-button">X</button>
         `;
-        todoList.appendChild(li);
-    });
-    let allTask = document.querySelectorAll(".item");
+        todoItems.appendChild(li);
+    }); 
     
-    for (let task of allTask) {
-        let item = task.textContent;
-        if (item.toLowerCase().indexOf(filterText) != -1) {
-            task.style.display = "block";   
-        } else {
-            task.style.display = "none";
-        }
-    };   
+    filterCondition();
 }
 
 function addToLocalStorage(todos) {
@@ -120,6 +111,19 @@ function clearTodo(e) {
 
 function filterTodo(e) {
     filterText = e.target.value.toLowerCase();
-    generateHTML();  
+    filterCondition();       
+}
+
+function filterCondition(){
+    let allTask = document.querySelectorAll(".item");
+    
+    for (let task of allTask) {
+        let item = task.textContent;
+        if (item.toLowerCase().indexOf(filterText) != -1) {
+            task.style.display = "block";   
+        } else {
+            task.style.display = "none";
+        }
+    } 
 }
 
