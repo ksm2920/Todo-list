@@ -10,14 +10,13 @@ h1 {
   font-size: 3rem; }
 
 .item {
-  background-color: #fff;
   padding: 10px;
   font-size: 1.1rem; }
 
 .checkbox {
   margin-right: 10px; }
 
-.btn-danger {
+.delete-button {
   float: right; }
 
 .checked {
