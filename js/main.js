@@ -37,7 +37,7 @@ function todo(e) {
             newTodo.value = '';
         }
         else {
-            alert("Please add a Todo!");
+            alert("Please add a task!");
         } 
     }
 }
@@ -62,7 +62,7 @@ function generateHTML() {
         li.innerHTML = `
         <input type="checkbox" class="checkbox" ${checked}>
         ${item.name}
-        <button class="delete-button">X</button>
+        <button class="btn btn-danger delete-button">X</button>
         `;
         
         todoList.appendChild(li);
