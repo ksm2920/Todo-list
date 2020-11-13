@@ -1,19 +1,19 @@
 window.onload = function() {
     let todoForm = document.querySelector('.todo-form');
-    let filter = document.querySelector("#filter-input");
+    let search = document.querySelector('#search-input');
     let todoList = document.querySelector('.todo-items');
-    let clearButton = document.querySelector("#clear-button");
+    let clearButton = document.querySelector('#clear-button');
     
     todoForm.addEventListener('submit', todo);
-    filter.addEventListener("keyup", filterTodo);
+    search.addEventListener('keyup', searchTodo);
     todoList.addEventListener('click', clearTodo);
-    clearButton.addEventListener("click", clearAll);
+    clearButton.addEventListener('click', clearAll);
     
     getFromLocalStorage();
 } 
 
 let todos = [];
-let filterText = "";
+let searchText = "";
 
 function todo(e) {
     let newTodo = document.querySelector('#todo-input');
@@ -23,7 +23,7 @@ function todo(e) {
     
     function addTodo(e) {
         let item = newTodo.value;
-        if (item !== '') {
+        if (item !== "") {
             let todo = {
                 id: Date.now(),
                 name: item,
@@ -31,7 +31,7 @@ function todo(e) {
             };
             todos.push(todo);
             addToLocalStorage(todos);
-            newTodo.value = '';
+            newTodo.value = "";
         }
         else {
             alert("Please add a task!");
@@ -42,7 +42,7 @@ function todo(e) {
 function generateHTML() {
     let todoItems = document.querySelector('.todo-items');
     
-    todoItems.innerHTML = '';
+    todoItems.innerHTML = "";
     
     todos.forEach(function(item) {
         let checked = item.completed ? 'checked': null;
@@ -54,14 +54,14 @@ function generateHTML() {
             li.classList.add('checked');
         }
         li.innerHTML = `
-        <input type="checkbox" class="checkbox" ${checked}>
+        <input type='checkbox' class='checkbox' ${checked}>
         ${item.name}
-        <button class="btn btn-danger delete-button">X</button>
+        <button class='btn btn-danger delete-button'>X</button>
         `;
         todoItems.appendChild(li);
     }); 
     
-    filterCondition();
+    searchCondition();
 }
 
 function addToLocalStorage(todos) {
@@ -109,20 +109,20 @@ function clearTodo(e) {
     }
 }
 
-function filterTodo(e) {
-    filterText = e.target.value.toLowerCase();
-    filterCondition();       
+function searchTodo(e) {
+    searchText = e.target.value.toLowerCase();
+    searchCondition();       
 }
 
-function filterCondition(){
-    let allTask = document.querySelectorAll(".item");
+function searchCondition(){
+    let allTask = document.querySelectorAll('.item');
     
     for (let task of allTask) {
         let item = task.textContent;
-        if (item.toLowerCase().indexOf(filterText) != -1) {
-            task.style.display = "block";   
+        if (item.toLowerCase().indexOf(searchText) != -1) {
+            task.style.display = 'block';   
         } else {
-            task.style.display = "none";
+            task.style.display = 'none';
         }
     } 
 }
