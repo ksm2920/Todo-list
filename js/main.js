@@ -9,35 +9,52 @@ window.onload = function() {
     todoList.addEventListener('click', clearTodo);
     clearButton.addEventListener('click', clearAll);
     
+    addSampleTodosToLocalStorage();
     getFromLocalStorage();
 } 
 
 let todos = [];
 let searchText = "";
 
+let hardcodedTodos = [
+    {
+        id: 1,
+        name: "A dummy task",
+        completed: false
+    },
+    {
+        id: 2,
+        name: "A completed task",
+        completed: true
+    },
+    {
+        id: 3,
+        name: "Another dummy task",
+        completed: false
+    },            
+    
+];
+
 function todo(e) {
     let newTodo = document.querySelector('#todo-input');
     
     e.preventDefault();
-    addTodo(newTodo.value); 
+    let item = newTodo.value;
     
-    function addTodo() {
-        let item = newTodo.value;
-        
-        if (item !== "") {
-            let todo = {
-                id: Date.now(),
-                name: item,
-                completed: false
-            };
-            todos.push(todo);
-            addToLocalStorage(todos);
-            newTodo.value = "";
-        }
-        else {
-            alert("Please add a task!");
-        } 
+    if (item !== "") {
+        let todo = {
+            id: Date.now(),
+            name: item,
+            completed: false
+        };
+        todos.push(todo);
+        addToLocalStorage(todos);
+        newTodo.value = "";
     }
+    else {
+        alert("Please add a task!");
+    }
+    
 }
 
 function generateHTML() {
@@ -134,5 +151,11 @@ function searchCondition(){
             task.style.display = 'none';
         }
     } 
+}
+
+function addSampleTodosToLocalStorage() {
+    if(localStorage.getItem('todos') == null) {
+        addToLocalStorage(hardcodedTodos);
+    }    
 }
 
