@@ -23,6 +23,7 @@ function todo(e) {
     
     function addTodo(e) {
         let item = newTodo.value;
+        
         if (item !== "") {
             let todo = {
                 id: Date.now(),
@@ -47,9 +48,10 @@ function generateHTML() {
     todos.forEach(function(item) {
         let checked = item.completed ? 'checked': null;
         let li = document.createElement('li');
+        
         li.setAttribute('class', 'item');
         li.setAttribute('data-key', item.id);
-    
+        
         if (item.completed === true) {
             li.classList.add('checked');
         }
@@ -66,11 +68,13 @@ function generateHTML() {
 
 function addToLocalStorage(todos) {
     localStorage.setItem('todos', JSON.stringify(todos));
+    
     generateHTML();
 }
 
 function getFromLocalStorage() {
     let reference = localStorage.getItem('todos');
+    
     if (reference) {
         todos = JSON.parse(reference);
         generateHTML();
@@ -79,10 +83,12 @@ function getFromLocalStorage() {
 
 function toggle(id) {
     todos.forEach(function(item) {
+        
         if (item.id == id) {
             item.completed = !item.completed;
         }
     });
+    
     addToLocalStorage(todos);
 }
 
@@ -90,12 +96,15 @@ function deleteTodo(id) {
     todos = todos.filter(function(item) {
         return item.id != id;
     });
+    
     addToLocalStorage(todos);
 }
 
 function clearAll() {
     let todoList = document.querySelector('.todo-items');
+    
     todoList.innerHTML = " ";
+    
     localStorage.clear(todos);
     todos = [];
 }
@@ -111,6 +120,7 @@ function clearTodo(e) {
 
 function searchTodo(e) {
     searchText = e.target.value.toLowerCase();
+    
     searchCondition();       
 }
 
