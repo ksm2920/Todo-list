@@ -1,23 +1,29 @@
-* {
-  padding: 0;
-  margin: 0; }
-
 body {
   justify-content: center; }
 
 h1 {
   color: black;
-  text-align: center; }
+  text-align: center;
+  padding: 20px; }
+
+.todo-items {
+  padding: 0px; }
 
 .item {
   padding: 10px;
-  font-size: 18px; }
+  font-size: 18px;
+  list-style: none; }
 
 .checkbox {
+  cursor: pointer;
   margin-right: 10px; }
 
-.delete-button {
-  float: right; }
+.delete-icon {
+  float: right;
+  color: red; }
+  .delete-icon:hover {
+    color: darkred;
+    cursor: pointer; }
 
 .checked {
   text-decoration: line-through; }
