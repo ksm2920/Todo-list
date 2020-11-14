@@ -1,13 +1,11 @@
 window.onload = function() {
     let todoForm = document.querySelector('.todo-form');
-    let search = document.querySelector('#search-input');
     let todoList = document.querySelector('.todo-items');
     let sortByLatest = document.querySelector('#sort-by-latest');
     let sortByOldest = document.querySelector('#sort-by-oldest');
     let clearButton = document.querySelector('#clear-button');
     
     todoForm.addEventListener('submit', todo);
-    search.addEventListener('keyup', searchTodo);
     todoList.addEventListener('click', clearTodo);
     sortByLatest.addEventListener('click', sortByLatestTask);
     sortByOldest.addEventListener('click', sortByOldestTask);
@@ -18,7 +16,7 @@ window.onload = function() {
 } 
 
 let todos = [];
-let searchText = "";
+let sortMode = "oldestTop";
 
 let hardcodedTodos = [
     {
@@ -61,31 +59,36 @@ function todo(e) {
 
 function generateHTML() {
     let todoItems = document.querySelector('.todo-items');
-    
+    let sortedTodos = [];
+
     todoItems.innerHTML = "";
+
+    if (sortMode == "oldestTop") {
+        sortedTodos = todos.sort(sortByOld);
+    } else if(sortMode == "latestTop") {
+        sortedTodos = todos.sort(sortByNew);
+    } else {
+        console.error("Invalid sortMode");
+    }
     
-    for (let i = 0; i < todos.length; i++) {
-        let checked = todos[i].completed ? 'checked' : null;
+    for (let i = 0; i < sortedTodos.length; i++) {
+        let checked = sortedTodos[i].completed ? 'checked' : null;
         let li = document.createElement('li');
         
         li.setAttribute('class', 'item');
-        li.setAttribute('data-key', todos[i].id);
+        li.setAttribute('data-key', sortedTodos[i].id);
         
-        if (todos[i].completed ===true) {
+        if (sortedTodos[i].completed ===true) {
             li.classList.add('checked');
         }
         li.innerHTML = `
         <input type= 'checkbox' class= 'checkbox'${checked}>
-        ${todos[i].name}
+        ${sortedTodos[i].name}
         <i class='fas fa-trash-alt delete-icon'></i>
         `;
         
-        if (todos[i])
-
         todoItems.appendChild(li);
-    }
-    
-    searchCondition();   
+    }   
 }
 
 function addToLocalStorage(todos) {
@@ -157,16 +160,6 @@ function searchCondition(){
     } 
 }
 
-function sortByNew(a,b) {
-    if (a.id > b.id) {
-        return -1;
-    }
-    if (a.id < b.id) {
-        return 1;
-    }
-    return 0;
-}
-
 function sortByOld(a,b) {
     if (a.id > b.id) {
         return 1;
@@ -177,13 +170,23 @@ function sortByOld(a,b) {
     return 0;
 }
 
-function sortByLatestTask() {
-    todos = todos.sort(sortByNew);
-    generateHTML();
+function sortByNew(a,b) {
+    if (a.id > b.id) {
+        return -1;
+    }
+    if (a.id < b.id) {
+        return 1;
+    }
+    return 0;
 }
 
 function sortByOldestTask() {
-    todos = todos.sort(sortByOld);
+    sortMode = "oldestTop";
+    generateHTML();
+}
+
+function sortByLatestTask() {
+    sortMode = "latestTop";
     generateHTML();
 }
 
