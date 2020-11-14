@@ -75,7 +75,7 @@ function generateHTML() {
         let checked = sortedTodos[i].completed ? 'checked' : null;
         let li = document.createElement('li');
         
-        li.setAttribute('class', 'item');
+        li.setAttribute('class', 'item list-group-item');
         li.setAttribute('data-key', sortedTodos[i].id);
         
         if (sortedTodos[i].completed ===true) {

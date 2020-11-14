@@ -13,30 +13,41 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css">
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h1>Todo List</h1>
-        <form class="todo-form">
-          <div class="input-group mb-3">
-            <input type="text" id="todo-input" class="form-control" placeholder="Add a new task">
-            <div class="input-group-append">
-              <button type="submit" id="add-button" class="btn btn-dark add-button">Add</button>
-            </div>
-          </div>  
-        </form>
+  <div class="container card">
+    <h1 class="card-header">Todo List</h1>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <form class="todo-form">
+            <div class="input-group mb-3">
+              <input type="text" id="todo-input" class="form-control" placeholder="Add a new task">
+              <div class="input-group-append">
+                <button type="submit" id="add-button" class="btn btn-dark add-button">Add</button>
+              </div>
+            </div>  
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col dropdown">
+          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" id="sort-by-latest" href="#">Latest top</a>
+            <a class="dropdown-item" id="sort-by-oldest" href="#">Oldest top</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ul class="todo-items list-group list-group-flush"></ul>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <button type="button" id="sort-by-oldest" class="btn btn-info">Oldest top</button>
-        <button type="button" id="sort-by-latest" class="btn btn-info">Latest top</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <ul class="todo-items"></ul>
-        <button class="btn btn-secondary" id="clear-button" type="button">Clear All</button>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-danger" id="clear-button" type="button">Clear All</button>
+        </div>
       </div>
     </div>
   </div>
