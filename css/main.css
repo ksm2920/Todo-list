@@ -1,6 +1,9 @@
 body {
   justify-content: center; }
 
+.row {
+  margin: 20px; }
+
 h1 {
   color: black;
   text-align: center;

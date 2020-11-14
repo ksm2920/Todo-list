@@ -2,11 +2,15 @@ window.onload = function() {
     let todoForm = document.querySelector('.todo-form');
     let search = document.querySelector('#search-input');
     let todoList = document.querySelector('.todo-items');
+    let sortByLatest = document.querySelector('#sort-by-latest');
+    let sortByOldest = document.querySelector('#sort-by-oldest');
     let clearButton = document.querySelector('#clear-button');
     
     todoForm.addEventListener('submit', todo);
     search.addEventListener('keyup', searchTodo);
     todoList.addEventListener('click', clearTodo);
+    sortByLatest.addEventListener('click', sortByLatestTask);
+    sortByOldest.addEventListener('click', sortByOldestTask);
     clearButton.addEventListener('click', clearAll);
     
     addSampleTodosToLocalStorage();
@@ -31,8 +35,7 @@ let hardcodedTodos = [
         id: 3,
         name: "Another dummy task",
         completed: false
-    },            
-    
+    },               
 ];
 
 function todo(e) {
@@ -54,21 +57,20 @@ function todo(e) {
     else {
         alert("Please add a task!");
     }
-    
 }
 
 function generateHTML() {
     let todoItems = document.querySelector('.todo-items');
     
     todoItems.innerHTML = "";
-
+    
     for (let i = 0; i < todos.length; i++) {
         let checked = todos[i].completed ? 'checked' : null;
         let li = document.createElement('li');
         
         li.setAttribute('class', 'item');
         li.setAttribute('data-key', todos[i].id);
-
+        
         if (todos[i].completed ===true) {
             li.classList.add('checked');
         }
@@ -77,6 +79,8 @@ function generateHTML() {
         ${todos[i].name}
         <i class='fas fa-trash-alt delete-icon'></i>
         `;
+        
+        if (todos[i])
 
         todoItems.appendChild(li);
     }
@@ -105,7 +109,7 @@ function toggle(id) {
             todos[i].completed =!todos[i].completed;
         }
     }
-   addToLocalStorage(todos);
+    addToLocalStorage(todos);
 }
 
 function deleteTodo(id) {
@@ -153,9 +157,38 @@ function searchCondition(){
     } 
 }
 
+function sortByNew(a,b) {
+    if (a.id > b.id) {
+        return -1;
+    }
+    if (a.id < b.id) {
+        return 1;
+    }
+    return 0;
+}
+
+function sortByOld(a,b) {
+    if (a.id > b.id) {
+        return 1;
+    }
+    if (a.id < b.id) {
+        return -1;
+    }
+    return 0;
+}
+
+function sortByLatestTask() {
+    todos = todos.sort(sortByNew);
+    generateHTML();
+}
+
+function sortByOldestTask() {
+    todos = todos.sort(sortByOld);
+    generateHTML();
+}
+
 function addSampleTodosToLocalStorage() {
-    if(localStorage.getItem('todos') == null) {
+    if (localStorage.getItem('todos') == null) {
         addToLocalStorage(hardcodedTodos);
     }    
 }
-
