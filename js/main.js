@@ -141,25 +141,6 @@ function clearTodo(e) {
     }
 }
 
-function searchTodo(e) {
-    searchText = e.target.value.toLowerCase();
-    
-    searchCondition();       
-}
-
-function searchCondition(){
-    let allTask = document.querySelectorAll('.item');
-    
-    for (let task of allTask) {
-        let item = task.textContent;
-        if (item.toLowerCase().indexOf(searchText) != -1) {
-            task.style.display = 'block';   
-        } else {
-            task.style.display = 'none';
-        }
-    } 
-}
-
 function sortByOld(a,b) {
     if (a.id > b.id) {
         return 1;
