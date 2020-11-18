@@ -7,9 +7,9 @@ window.onload = function() {
     
     todoForm.addEventListener('submit', todo);
     todoList.addEventListener('click', clearTodo);
-    sortByLatest.addEventListener('click', sortByLatestTask);
-    sortByOldest.addEventListener('click', sortByOldestTask);
-    clearButton.addEventListener('click', clearAll);
+    sortByLatest.addEventListener('click', sortByLatestTodo);
+    sortByOldest.addEventListener('click', sortByOldestTodo);
+    clearButton.addEventListener('click', clearAllTodos);
     
     addSampleTodosToLocalStorage();
     getFromLocalStorage();
@@ -18,7 +18,7 @@ window.onload = function() {
 let todos = [];
 let sortMode = "oldestTop";
 
-let hardcodedTodos = [
+let hardCodedTodos = [
     {
         id: 1,
         name: "A dummy task",
@@ -123,7 +123,7 @@ function deleteTodo(id) {
     addToLocalStorage(todos);
 }
 
-function clearAll() {
+function clearAllTodos() {
     let todoList = document.querySelector('.todo-items');
     
     todoList.innerHTML = " ";
@@ -161,18 +161,18 @@ function sortByNew(a,b) {
     return 0;
 }
 
-function sortByOldestTask() {
+function sortByOldestTodo() {
     sortMode = "oldestTop";
     generateHTML();
 }
 
-function sortByLatestTask() {
+function sortByLatestTodo() {
     sortMode = "latestTop";
     generateHTML();
 }
 
 function addSampleTodosToLocalStorage() {
     if (localStorage.getItem('todos') == null) {
-        addToLocalStorage(hardcodedTodos);
+        addToLocalStorage(hardCodedTodos);
     }    
 }
